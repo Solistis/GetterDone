@@ -46,7 +46,7 @@ This guide will walk you through installing Git, cloning the UniWebEnrollment re
      ```
    - If Git is installed correctly, you'll see the version number.
 
-## Step 2: Clone the UniWebEnrollment Repository
+## Step 2: Clone the GetterDone Repository
 
 1. **Navigate to Your Desired Directory:**
    - Open a terminal (Linux) or Command Prompt/PowerShell (Windows).
@@ -56,15 +56,15 @@ This guide will walk you through installing Git, cloning the UniWebEnrollment re
      ```
 
 2. **Clone the Repository:**
-   - Run the following command to clone the UniWebEnrollment repository:
+   - Run the following command to clone the GetterDone repository:
      ```bash
-     git clone https://github.com/kinseyboze/UniWebEnrollment.git
+     git clone https://github.com/Solistis/GetterDone.git
      ```
 
 3. **Navigate into the Repository:**
    - Use the `cd` command to move into the cloned repository:
      ```bash
-     cd UniWebEnrollment
+     cd GetterDone
      ```
 
 ## Step 3: Set Up Your Environment
