@@ -1,188 +1,267 @@
-# Getting Started with Git and the GetterDone Repository
-To-Do List App
+# Reminder App
 
-This guide will walk you through installing Git, cloning the repository, and setting up your environment to start working.
+A full-stack reminder and task management web application built with **Node.js**, **Express**, and **PostgreSQL**.
 
-## Step 1: Install Git
+The goal of this project is to create a simple and fast system for managing:
+- assignments
+- chores
+- errands
+- reminders
+- recurring tasks
+- flexible vs urgent activities
 
-### On Windows:
-1. **Download Git:**
-   - Visit the official Git website: [https://git-scm.com/](https://git-scm.com/).
-   - Click on the "Download for Windows" button.
-
-2. **Run the Installer:**
-   - Open the downloaded `.exe` file.
-   - Follow the installation wizard:
-     - Accept the license agreement.
-     - Choose the default components (recommended).
-     - Select "Git from the command line and also from 3rd-party software" when prompted.
-     - Use the default options for the remaining steps.
-
-3. **Verify Installation:**
-   - Open Command Prompt or PowerShell.
-   - Run the command:
-     ```bash
-     git --version
-     ```
-   - If Git is installed correctly, you'll see the version number.
-
-### On Linux:
-1. **Install Git:**
-   - Open a terminal.
-   - Run the following command based on your distribution:
-
-     - **Debian/Ubuntu:**
-       ```bash
-       sudo apt update
-       sudo apt install git
-       ```
-
-2. **Verify Installation:**
-   - Run the command:
-     ```bash
-     git --version
-     ```
-   - If Git is installed correctly, you'll see the version number.
-
-## Step 2: Clone the GetterDone Repository
-
-1. **Navigate to Your Desired Directory:**
-   - Open a terminal (Linux) or Command Prompt/PowerShell (Windows).
-   - Use the `cd` command to navigate to the directory where you want to clone the repository. For example:
-     ```bash
-     cd ~/Documents
-     ```
-
-2. **Clone the Repository:**
-   - Run the following command to clone the GetterDone repository:
-     ```bash
-     git clone https://github.com/Solistis/GetterDone.git
-     ```
-
-3. **Navigate into the Repository:**
-   - Use the `cd` command to move into the cloned repository:
-     ```bash
-     cd GetterDone
-     ```
-
-## Step 3: Set Up Your Environment
-
-1. **Create a New Branch:**
-   - Before making changes, create a new branch to work on:
-     ```bash
-     git checkout -b your-branch-name
-     ```
-   - Replace `your-branch-name` with a descriptive name for your branch (e.g., `feature/add-login`).
-
-2. **Make Changes:**
-   - Open the repository in your preferred code editor (e.g., VS Code, Sublime Text).
-   - Make the necessary changes to the code.
-
-3. **Stage and Commit Changes:**
-   - Stage your changes:
-     ```bash
-     git add .
-     ```
-   - Commit your changes with a descriptive message:
-     ```bash
-     git commit -m "Your commit message here"
-     ```
-
-4. **Push Changes to Remote:**
-   - Push your branch to the remote repository:
-     ```bash
-     git push origin your-branch-name
-     ```
-
-5. **Create a Pull Request (Optional):**
-   - If you're working in a team, go to the repository on GitHub and create a pull request for your branch.
-
-## Step 4: Keep Your Repository Updated
-
-1. **Fetch and Merge Changes:**
-   - Before starting work, ensure your local repository is up to date:
-     ```bash
-     git checkout main
-     git pull origin main
-     ```
-
-2. **Merge Your Branch (Optional):**
-   - If you're working on a feature branch, merge it onto the latest main branch:
-     ```bash
-     git checkout your-branch-name
-     git merge main
-     ```
-
-## Additional Resources
-
-- [Git Documentation](https://git-scm.com/doc)
-- [GitHub Guides](https://guides.github.com/)
+This project is designed to be mobile-friendly and easy to use so users can quickly enter reminders from their phone without relying on memory or handwritten notes.
 
 ---
 
-## Setting Up SSH for GitHub (For Contributors)
+# Current Tech Stack
 
-### For **Windows** Users:
+## Backend
+- Node.js
+- Express.js
+- PostgreSQL
+- pg
+- dotenv
+- cors
+- nodemon
 
-1. **Generate a new SSH key**:
-   - Open **Git Bash** (you can install it from [here](https://git-scm.com/)).
-   - Run the following command to generate a new SSH key:
-     ```bash
-     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-     ```
-     - When prompted to "Enter file in which to save the key", press `Enter` to accept the default location (`/c/Users/your-username/.ssh/id_rsa`).
-     - You can choose to set a passphrase or leave it empty (press `Enter`).
+## Planned Frontend
+- HTML/CSS/JavaScript
+- Bootstrap or Tailwind CSS
+- Responsive mobile-first design
 
-2. **Copy the SSH public key**:
-   - Run the following command to display your SSH public key:
-     ```bash
-     cat ~/.ssh/id_rsa.pub
-     ```
-     - Copy the output of this command.
+## Planned Features
+- User authentication
+- Assignment tracking
+- Due date reminders
+- Recurring chores
+- Grocery/location reminders
+- Flexible vs urgent tasks
+- Mobile-friendly quick-add system
+- Push/email notifications
+- Docker support
+- Deployment
 
-3. **Add the SSH key to GitHub**:
-   - Go to **GitHub > Settings > SSH and GPG keys**.
-   - Click **New SSH key**, give it a title (e.g., "Windows Laptop SSH Key"), and paste your SSH key into the key field.
+---
 
-4. **Change your repository's remote URL to SSH**:
-   - Open your project in Git Bash, then run:
-     ```bash
-     git remote set-url origin git@github.com:kinseyboze/UniWebEnrollment.git
-     ```
-   - Verify the change by running:
-     ```bash
-     git remote -v
-     ```
-     The URL should now start with `git@github.com:kinseyboze/UniWebEnrollment.git`.
+# Software Installation
 
-### For **Linux** Users:
+## 1. Install Node.js
 
-1. **Generate a new SSH key**:
-   - Open a terminal and run the following command to generate a new SSH key:
-     ```bash
-     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-     ```
-     - When prompted to "Enter file in which to save the key", press `Enter` to accept the default location (`~/.ssh/id_rsa`).
-     - You can choose to set a passphrase or leave it empty (press `Enter`).
+Download the LTS version from:
 
-2. **Copy the SSH public key**:
-   - Run the following command to display your SSH public key:
-     ```bash
-     cat ~/.ssh/id_rsa.pub
-     ```
-     - Copy the output of this command.
+[Node.js Official Website](https://nodejs.org/en?utm_source=chatgpt.com)
 
-3. **Add the SSH key to GitHub**:
-   - Go to **GitHub > Settings > SSH and GPG keys**.
-   - Click **New SSH key**, give it a title (e.g., "Linux Desktop SSH Key"), and paste your SSH key into the key field.
+After installation, verify it works:
 
-4. **Change your repository's remote URL to SSH**:
-   - In your project directory, run the following command to change the remote URL to SSH:
-     ```bash
-     git remote set-url origin git@github.com:kinseyboze/UniWebEnrollment.git
-     ```
-   - Verify the change by running:
-     ```bash
-     git remote -v
-     ```
-     The URL should now start with `git@github.com:kinseyboze/UniWebEnrollment.git`.
+```bash
+node -v
+npm -v
+```
+
+---
+
+## 2. Install PostgreSQL
+
+Download PostgreSQL and pgAdmin from:
+
+[PostgreSQL Downloads](https://www.postgresql.org/download/windows/?utm_source=chatgpt.com)
+
+During installation:
+- Install PostgreSQL Server
+- Install pgAdmin 4
+- Keep default port:
+```txt
+5432
+```
+
+Remember the password you create for the `postgres` user.
+
+---
+
+## 3. Install VS Code
+
+Download Visual Studio Code:
+
+[Visual Studio Code](https://code.visualstudio.com/?utm_source=chatgpt.com)
+
+Recommended extensions:
+- ES7+ React/JavaScript Snippets
+- PostgreSQL
+- DotENV
+- Thunder Client or Postman (API testing)
+
+---
+
+# Project Structure
+
+```txt
+ReminderApp/
+│
+├── backend/
+│   ├── src/
+│   │   ├── index.js
+│   │   ├── db.js
+│   │   ├── routes/
+│   │   └── controllers/
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   └── package.json
+│
+└── frontend/
+```
+
+---
+
+# Backend Setup
+
+## 1. Initialize Node Project
+
+Inside the backend folder:
+
+```bash
+npm init -y
+```
+
+This creates:
+
+```txt
+package.json
+```
+
+---
+
+## 2. Install Dependencies
+
+Install required packages:
+
+```bash
+npm install express pg cors dotenv
+```
+
+Install development dependency:
+
+```bash
+npm install --save-dev nodemon
+```
+
+---
+
+# What These Packages Do
+
+| Package | Purpose |
+|---|---|
+| express | Backend web framework |
+| pg | PostgreSQL driver for Node.js |
+| cors | Allows frontend/backend communication |
+| dotenv | Loads environment variables |
+| nodemon | Automatically restarts server during development |
+
+---
+
+# Environment Variables
+
+Create a `.env` file inside the backend folder:
+
+```env
+PORT=4000
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=reminder_app
+```
+
+---
+
+# Important Security Note
+
+Never upload `.env` to GitHub.
+
+Create a `.gitignore` file:
+
+```gitignore
+node_modules/
+.env
+```
+
+If `.env` was already committed:
+
+```bash
+git rm --cached .env
+```
+
+---
+
+# Create PostgreSQL Database
+
+Open pgAdmin and create a new database named:
+
+```txt
+reminder_app
+```
+
+---
+
+# Running the Backend Server
+
+## Development Mode
+
+```bash
+npm run dev
+```
+
+## Production Mode
+
+```bash
+npm start
+```
+
+If successful, terminal should display:
+
+```txt
+Server running on port 4000
+```
+
+Visit:
+
+```txt
+http://localhost:4000
+```
+
+Expected response:
+
+```json
+{
+  "message": "Reminder app backend running"
+}
+```
+
+---
+
+# Current Status
+
+✅ Node.js backend initialized  
+✅ Express server configured  
+✅ PostgreSQL connection setup started  
+✅ Environment variable configuration  
+✅ Backend folder structure initialized  
+
+---
+
+# Future Goals
+
+- Create task/reminder API routes
+- Build responsive frontend
+- Add authentication
+- Implement notification system
+- Add Docker containerization
+- Deploy application online
+
+---
+
+# Author
+
+Ariana
