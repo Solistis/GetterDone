@@ -25,6 +25,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 router.post("/", async (req, res) => {
     try {
         const { title, details, kind, urgency, due_at } = req.body;
@@ -64,6 +65,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+
 router.patch("/:id/complete", async (req, res) => {
     try {
         const { id } = req.params;
@@ -96,6 +98,113 @@ router.patch("/:id/complete", async (req, res) => {
             success: false,
             error: error.message,
         });
+    }
+});
+
+// GET active items
+router.get("/active", async (req, res) => {
+    try {
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM item
+        WHERE status = 'active'
+        ORDER BY created_at DESC
+        `
+    );
+
+    res.json({
+        success: true,
+        items: result.rows,
+        });
+    } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        error: error.message,
+        });
+    }
+});
+
+// GET completed items
+router.get("/completed", async (req, res) => {
+    try {
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM item
+            WHERE status = 'completed'
+            ORDER BY created_at DESC
+            `
+    );
+
+    res.json({
+        success: true,
+        items: result.rows,
+    });
+    } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        error: error.message,
+    });
+    }
+});
+
+// GET must-do items
+router.get("/must-do", async (req, res) => {
+    try {
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM item
+        WHERE urgency = 'must_do'
+        AND status = 'active'
+        ORDER BY due_at ASC NULLS LAST, created_at DESC
+        `
+    );
+
+    res.json({
+        success: true,
+        items: result.rows,
+    });
+    } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        error: error.message,
+    });
+    }
+});
+
+// GET overdue items
+router.get("/overdue", async (req, res) => {
+    try {
+        const result = await pool.query(
+            `
+        SELECT *
+            FROM item
+            WHERE due_at IS NOT NULL
+            AND due_at < NOW()
+            AND status = 'active'
+            ORDER BY due_at ASC
+            `
+        );
+
+    res.json({
+        success: true,
+        items: result.rows,
+    });
+    } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        success: false,
+        error: error.message,
+    });
     }
 });
 
