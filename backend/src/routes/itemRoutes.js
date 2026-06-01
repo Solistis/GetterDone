@@ -208,6 +208,41 @@ router.get("/overdue", async (req, res) => {
     }
 });
 
+// GET one item by ID
+router.get("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM item
+            WHERE item_id = $1
+            `,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                succes: false,
+                message: "Item no found",
+            });
+        }
+
+        res.json({
+            success: true,
+            item: result.rows[0],
+        });
+    } catch (error) {
+        console.error(error);
+        
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -231,6 +266,49 @@ router.delete("/:id", async (req, res) => {
         res.json({
             success: true,
             message: "Item deleted",
+            item: result.rows[0],
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
+// UPDATE item
+router.put("/:id", async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { title, details, kind, urgency, due_at, status } = req.body;
+
+        const result = await pool.query(
+            `
+            UPDATE item
+            SET
+                title = COALESCE($1, title),
+                details = COALESCE($2, details),
+                kind = COALESCE($3, kind),
+                urgency = COALESCE($4, urgency),
+                due_at = COALESCE($5, due_at),
+                status = COALESCE($6, status)
+            WHERE item_id = $7
+            RETURNING *
+            `,
+            [title, details, kind, urgency, due_at, status, id]
+        );
+
+        if(result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Item not found",
+            });
+        }
+
+        res.json({
+            success: true,
             item: result.rows[0],
         });
     } catch (error) {
