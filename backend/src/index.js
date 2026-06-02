@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 const itemRoutes = require("./routes/itemRoutes");
+const listRoutes = require("./routes/listRoutes");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/items", itemRoutes);
+app.use("/list", listRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Reminder app backend running" });
