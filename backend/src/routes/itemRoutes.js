@@ -28,7 +28,14 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const { title, details, kind, urgency, due_at } = req.body;
+        const { title, details, kind, urgency, due_at, list_id } = req.body  || {};
+        
+        if (!title) {
+            return res.status(400).json({
+                success: false,
+                message: "Title is required",
+            });
+        }
 
         const result = await pool.query(
             `
@@ -37,9 +44,10 @@ router.post("/", async (req, res) => {
                 details,
                 kind,
                 urgency,
-                due_at
+                due_at,
+                list_id
             )
-            VALUES ($1, $2, $3, $4, $5)
+            VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING *
             `,
             [
@@ -48,6 +56,7 @@ router.post("/", async (req, res) => {
                 kind || "task",
                 urgency || "flexible",
                 due_at || null,
+                list_id || null,
             ]
         );
 
@@ -282,7 +291,7 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try{
         const { id } = req.params;
-        const { title, details, kind, urgency, due_at, status } = req.body;
+        const { title, details, kind, urgency, due_at, status, list_id } = req.body;
 
         const result = await pool.query(
             `
@@ -293,11 +302,12 @@ router.put("/:id", async (req, res) => {
                 kind = COALESCE($3, kind),
                 urgency = COALESCE($4, urgency),
                 due_at = COALESCE($5, due_at),
-                status = COALESCE($6, status)
-            WHERE item_id = $7
+                status = COALESCE($6, status),
+                list_id = COALESCE($7, list_id)
+            WHERE item_id = $8
             RETURNING *
             `,
-            [title, details, kind, urgency, due_at, status, id]
+            [title, details, kind, urgency, due_at, status, list_id, id]
         );
 
         if(result.rows.length === 0) {

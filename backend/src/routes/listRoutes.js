@@ -55,4 +55,33 @@ router.post("/", async (req, res) => {
     }
 });
 
+// GET all items for one list
+router.get("/:id/items", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM item
+            WHERE list_id = $1
+            ORDER BY created_at DESC
+            `,
+            [id]
+        );
+
+        res.json({
+            success: true,
+            items: result.rows,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
 module.exports = router;
